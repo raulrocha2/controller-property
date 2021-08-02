@@ -1,0 +1,6 @@
+/node_modules
+/build
+/npm-debug.log
+/backend/config/*.env
+/.DS_Store
+/*.sqlite
