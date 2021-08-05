@@ -4,3 +4,4 @@
 /backend/config/*.env
 /.DS_Store
 /*.sqlite
+/__tests__/coverage/

@@ -9,25 +9,7 @@ describe('Register and Authentication', () => {
         await truncate();
     })
 
-
-    it('Should authenticate with valid credentials ', async () => {
-
-        const user = await factory.create('User', {
-            password: 'auth123123'
-        })
-
-        console.log(user);
-        const response = await request(app)
-            .post('/api/v1/login')
-            .send({
-                email: user.email,
-                password: 'auth123123'
-            })
-        
-        expect(response.status).toBe(200);
-    });
-
-    it('Should not be able to access with e-mail not registered', async () => {
+    it('Should not be able to access with e-mail not registered (route /api/v1/register)', async () => {
 
         const response = await request(app)
             .post('/api/v1/login')
@@ -39,8 +21,24 @@ describe('Register and Authentication', () => {
         expect(response.status).toBe(401);
     });
 
+    it('Should authenticate with valid credentials (route /api/v1/login)', async () => {
 
-    it('Should Register new user in router /api/v1/register ', async () => {
+        const user = await factory.create('User', {
+            password: 'auth123123'
+        })
+
+        const response = await request(app)
+            .post('/api/v1/login')
+            .send({
+                email: user.email,
+                password: 'auth123123'
+            })
+        
+        expect(response.status).toBe(200);
+    });
+
+
+    it('Should Register new user in (route /api/v1/register)', async () => {
 
         const response = await request(app)
             .post('/api/v1/register')
@@ -87,7 +85,7 @@ describe('Register and Authentication', () => {
     });
 
 
-    it('Should be able to access private routes when authenticated', async () => {
+    it('Should be able to access private routes when authenticated (Route /api/v1/profile/me)', async () => {
 
         const user = await factory.create('User', {
             password: 'token123123'
@@ -122,6 +120,25 @@ describe('Register and Authentication', () => {
             .set('cookie', 'token=12312313')
         
         expect(response.status).toBe(401);
+    });
+
+
+    it('Should be able update user ', async () => {
+
+        const user = await factory.create('User', {
+            password: 'token123123'
+        })
+
+        const token = user.generateToken()
+
+        const response = await request(app)
+            .put(`/api/v1/profile/update/${user.id}`)
+            .set('cookie', `token=${token}`)
+            .send({
+                departament: 'Update Department'
+            })
+        
+        expect(response.status).toBe(200);
     });
 
 

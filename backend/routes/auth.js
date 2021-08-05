@@ -1,9 +1,17 @@
 const router = require('express').Router();
-const { loginUser, registerUser, profileUser} = require('../controllers/authController');
+const { 
+    loginUser, 
+    registerUser, 
+    profileUser, 
+    logoutUser, 
+    updateUser
+} = require('../controllers/authController');
 const { isAtuthenticated } = require('../middlewares/auth');
 
 router.route('/login').post(loginUser);
 router.route('/register').post(registerUser);
 router.route('/profile/me').get(isAtuthenticated, profileUser);
+router.route('/profile/update/:id').put(isAtuthenticated, updateUser);
+router.route('/logout').get(logoutUser);
 
 module.exports = router;

@@ -15,6 +15,37 @@ exports.registerUser = (async (req, res) => {
     sendToken(user, 200, res)
 })
 
+exports.updateUser = (async (req, res) => {
+
+    const newUserData = {
+        name: req.body.name,
+        email: req.body.email,
+        departament: req.body.departament,
+        role: req.body.role
+    }
+
+    let user = await User.findByPk(req.params.id);
+
+    if (!user) {
+        return res.status(404).json({ 
+            message: 'User not found'
+        })
+    }   
+
+    user = await User.update(newUserData, {
+                where: { id: req.params.id }
+            })
+
+  
+    res.status(200).json({
+        success: true,
+        user
+    })
+   
+
+    
+})
+
 
 exports.loginUser = (async (req, res) => {
 
@@ -60,5 +91,22 @@ exports.profileUser = (async (req, res) => {
     res.status(200).json({
         success: true,
         user
+    })
+})
+
+
+
+// Router /api/v1/logout
+
+exports.logoutUser = (async (req, res) => {
+
+    res.cookie('token', null, {
+        expires: new Date(Date.now()),
+        httpOnly: true
+    })
+
+    res.status(200).json({
+        success: true,
+        message: 'Logged out'
     })
 })

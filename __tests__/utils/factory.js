@@ -1,6 +1,6 @@
 const { factory } = require('factory-girl');
 const faker = require('faker');
-const { User } = require('../../backend/models');
+const { User, Local } = require('../../backend/models');
 
 
 factory.define('User', User, {
@@ -9,6 +9,15 @@ factory.define('User', User, {
     departament: faker.name.findName(),
     role: 'user',
     password: faker.internet.password()
+})
+
+factory.define('Local', Local, {
+    contract: faker.name.findName(),
+    cust_of_center: faker.datatype.number(),
+    city: faker.address.city(),
+    state: faker.address.city(),
+    country: faker.address.country(),
+    is_active: true
 })
 
 module.exports = factory;
