@@ -37,5 +37,13 @@ module.exports = (sequelize, DataTypes) => {
         });
     
     }
+    
+    user.associate = function(models) {
+        user.hasMany(models.AllocatedProperty, {
+            foreignKey: 'user_id',
+            as: 'allocated_users'
+        })
+    }
+
     return user;
 };

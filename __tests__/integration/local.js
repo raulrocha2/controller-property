@@ -7,7 +7,7 @@ const factory = require('../utils/factory');
 describe("Local", () => {
 
     beforeEach( async () => {
-        await truncate();
+        await truncate({ cascade: true });
     })
     
     it("should create new Local (route /api/v1/local/new)", async () => {

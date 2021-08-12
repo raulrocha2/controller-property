@@ -7,7 +7,7 @@ const factory = require('../utils/factory');
 describe("Property", () => {
 
     beforeEach( async () => {
-        await truncate();
+        await truncate({ cascade: true });
     })
 
     it("should create new property (route /api/v1/property/new)", async () => {

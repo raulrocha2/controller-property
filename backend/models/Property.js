@@ -9,7 +9,14 @@ module.exports = (sequelize, DataTypes) => {
         is_avaliable: DataTypes.BOOLEAN,
         photo: DataTypes.BLOB('long')
 
-    });
+    })
+
+    Property.associate = function(models) {
+        Property.hasMany(models.AllocatedProperty, {
+            foreignKey: 'property_id',
+            as: 'allocated_properties'
+        })
+    }
 
     return Property;
 }

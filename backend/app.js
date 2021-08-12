@@ -11,10 +11,12 @@ app.use(cookieParser());
 const property = require('./routes/property');
 const local = require('./routes/local');
 const auth = require('./routes/auth');
+const allocated = require('./routes/allocatedProperty');
 
 app.use('/api/v1', property);
 app.use('/api/v1', local);
 app.use('/api/v1', auth);
+app.use('/api/v1', allocated);
 
 
 module.exports = app;

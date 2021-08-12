@@ -6,7 +6,7 @@ const truncate = require('../utils/truncate');
 
 describe('Register and Authentication', () => {
     beforeEach( async () => {
-        await truncate();
+        await truncate({ cascade: true });
     })
 
     it('Should not be able to access with e-mail not registered (route /api/v1/register)', async () => {

@@ -8,6 +8,7 @@ require('dotenv').config({
     password: process.env.DB_PASS,
     database: process.env.DB_NAME,
     dialect: process.env.DB_DIALECT || 'postgres',
+    storage: './__tests__/database.sqlite',
     operatorAliases: false,
     logging: false,
     define: {

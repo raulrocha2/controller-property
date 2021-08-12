@@ -8,7 +8,14 @@ module.exports = (sequelize, DataTypes) => {
         country: DataTypes.STRING,
         is_active: DataTypes.BOOLEAN
 
-    });
+    })
+
+    Local.associate = function(models) {
+        Local.hasMany(models.AllocatedProperty, {
+            foreignKey: 'local_id',
+            as: 'allocated_locals'
+        })
+    }
 
     return Local;
 }
