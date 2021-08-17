@@ -42,11 +42,33 @@ exports.newAllocated = (async (req, res) => {
 
 exports.getAllocaties = (async (req, res) => {
 
-    const allocated = await AllocatedProperty.findAll();
+    //const allocaties  = await AllocatedProperty.findAll();
+
+    const allocatiesUsers = await AllocatedProperty.findAll({
+        include: [{
+            model: User,
+            as: 'employes'
+          }]
+    })
+
+    const allocatiesProperties = await AllocatedProperty.findAll({
+        include: [{
+            model: Property,
+            as: 'property'
+          }]
+    })
+
+    const allocatiesLocals = await AllocatedProperty.findAll({
+        include: [{
+            model: Local,
+            as: 'locals'
+          }]
+    })
 
     res.status(200).json({
         success: true,
-        allocated
+        allocatiesUsers,
+        allocatiesProperties
     })
 });
 

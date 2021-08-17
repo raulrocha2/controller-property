@@ -94,6 +94,18 @@ exports.profileUser = (async (req, res) => {
     })
 })
 
+//CONTROLLERS ADMIN route /api/v1/admin/users
+
+exports.allUsers = (async (req, res) => {
+
+    const users = await User.findAll();
+
+    res.status(200).json({
+        success: true,
+        users
+    })
+})
+
 
 
 // Router /api/v1/logout

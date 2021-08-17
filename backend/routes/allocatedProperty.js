@@ -8,6 +8,8 @@ const {
     deleteAllocated
 } = require('../controllers/allocatedPropertyController');
 
+const { isAtuthenticated } = require('../middlewares/auth');
+
 router.route('/allocated/new').post(newAllocated);
 router.route('/allocaties').get(getAllocaties);
 router.route('/allocated/property/:number').get(getPropertyAllocated);

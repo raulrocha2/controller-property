@@ -55,11 +55,11 @@ exports.updateLocal = (async (req, res) => {
 exports.getAllLocals = (async (req, res) => {
 
 
-    const local = await Local.findAll();
+    const locals = await Local.findAll();
 
     res.status(200).json({
         success: true,
-        local
+        locals
     })
 })
 
